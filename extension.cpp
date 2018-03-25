@@ -46,17 +46,21 @@ IGameConfig *g_pGameConf;
 CDetour *dt_CTFGameRules_GetPayloadToPush;
 CDetour *dt_CTFGameRules_GetPayloadToBlock;
 
-DETOUR_DECL_MEMBER2(CTFGameRules_GetPayloadToPush, void, CBaseHandle*, handle, int, team) {
+class CBaseHandle {
+protected:
+	unsigned long m_Index;
+};
+
+DETOUR_DECL_MEMBER1(CTFGameRules_GetPayloadToPush, CBaseHandle, int, team) {
 	rootconsole->ConsolePrint("%s(%d)", "called CTFGameRules::GetPayloadToPush", team);
 	
-	// crash here
-	return DETOUR_MEMBER_CALL(CTFGameRules_GetPayloadToPush)(handle, team);
+	return DETOUR_MEMBER_CALL(CTFGameRules_GetPayloadToPush)(team);
 }
 
-DETOUR_DECL_MEMBER2(CTFGameRules_GetPayloadToBlock, void, CBaseHandle*, handle, int, team) {
+DETOUR_DECL_MEMBER1(CTFGameRules_GetPayloadToBlock, CBaseHandle, int, team) {
 	rootconsole->ConsolePrint("%s(%d)", "called CTFGameRules::GetPayloadToBlock", team);
 	
-	return DETOUR_MEMBER_CALL(CTFGameRules_GetPayloadToBlock)(handle, team);
+	return DETOUR_MEMBER_CALL(CTFGameRules_GetPayloadToBlock)(team);
 }
 
 bool TFPayloadHookTest::SDK_OnLoad(char *error, size_t maxlen, bool late) {
