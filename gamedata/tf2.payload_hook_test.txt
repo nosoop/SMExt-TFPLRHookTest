@@ -1,0 +1,20 @@
+"Games"
+{
+	"tf"
+	{
+		"Signatures"
+		{
+			"CTFGameRules::GetPayloadToBlock(int)"
+			{
+				"library" "server"
+				"linux" "@_ZNK12CTFGameRules17GetPayloadToBlockEi"
+			}
+			
+			"CTFGameRules::GetPayloadToPush(int)"
+			{
+				"library" "server"
+				"linux" "@_ZNK12CTFGameRules16GetPayloadToPushEi"
+			}
+		}
+	}
+}
